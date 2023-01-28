@@ -1,5 +1,6 @@
 ﻿using LeetCode;
-using System.Text;
+using LeetCode.Arrays;
+using LeetCode.Bitwise;
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, LeetCode!");
 
@@ -941,4 +942,49 @@ maxProduct.MaxProduct(new TreeNode(1, new TreeNode(2, new TreeNode(4), new TreeN
 
 MinFlipsMonoIncrSol minFlips = new MinFlipsMonoIncrSol();
 minFlips.MinFlipsMonoIncr("10011111110010111011");
+
+EscapeGhostsSol escapeGhosts = new EscapeGhostsSol();
+input = new int[][] {
+                new int[] {62,11},
+                new int[] {-11,6},
+                 new int[] {-28,4},
+                  new int[] {29,-23},
+                   new int[] {17,-64},
+                    new int[] {98,-69},
+                     new int[]{7,-98},
+                      new int[]{-34,67},
+                       new int[]{-70,-65},
+                        new int[]{-28,68}
+            };
+escapeGhosts.EscapeGhosts(input, new int[] { 84, -10 });
+
+input = new int[][] {
+                new int[] { -4, 1 },
+                new int[] { -4, 1 },
+                new int[] { 0, 3 },
+                new int[] { -1, 4 },
+                new int[] { -1, 4 }
+            };
+escapeGhosts.EscapeGhosts(input, new int[] { 0, 1 });
+input = new int[][] {
+                new int[] { 1, 0 },
+                new int[] { 3, 3 }
+            };
+escapeGhosts.EscapeGhosts(input, new int[] { 2, 0 });
+
+AlternateDigitSumSol alternateDigit = new AlternateDigitSumSol();
+alternateDigit.AlternateDigitSum(886996);
+
+SortTheStudentsSol studentsSol = new SortTheStudentsSol();
+input = new int[][] {
+                new int[] { 3, 4 },
+                new int[] { 5, 6 }
+            };
+studentsSol.SortTheStudents(input, 0);
+
+MakeStringsEqualSol makeStrings = new MakeStringsEqualSol();
+makeStrings.MakeStringsEqual("110", "101");
+makeStrings.MakeStringsEqual("1010", "0110");
+makeStrings.MakeStringsEqual("11", "00");
+
 
