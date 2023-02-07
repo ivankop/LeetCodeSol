@@ -987,4 +987,32 @@ makeStrings.MakeStringsEqual("110", "101");
 makeStrings.MakeStringsEqual("1010", "0110");
 makeStrings.MakeStringsEqual("11", "00");
 
+Largest1BorderedSquareSol Largest1BorderedSquareSol = new Largest1BorderedSquareSol();
+input = new int[][] {
+                new int[] { 1, 1, 1 },
+                new int[] { 1, 1, 1 },
+                new int[] { 1, 1, 1 },
+            };
+Largest1BorderedSquareSol.Largest1BorderedSquare(input);
 
+
+input = new int[][] {
+                new int[] { 1, 1, 1 },
+                new int[] { 1, 0, 1 },
+                new int[] { 1, 1, 1 },
+            };
+Largest1BorderedSquareSol.Largest1BorderedSquare(input);
+
+FindSubstringSol substringSol = new FindSubstringSol();
+substringSol.FindSubstring("wordgoodgoodgoodbestword", new string[] { "word", "good", "best", "good" });
+
+substringSol.FindSubstring("barfoothefoobarman", new string[] { "bar", "foo" });
+substringSol.FindSubstring("barfoofoobarthefoobarman", new string[] { "bar", "foo", "the" });
+
+FindWordsSol2 findWordsSol = new FindWordsSol2();
+var board = new char[][] {
+                new char[] { 'a', 'b' },
+                new char[] { 'a', 'a' }
+            };
+//findWordsSol.FindWords(board, new string[] {"aaa","aaaa","aaba"});
+findWordsSol.FindWords(board, new string[] {"aba","baa","bab","aaab","aaa","aaaa","aaba"});
