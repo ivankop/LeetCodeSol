@@ -1016,3 +1016,6 @@ var board = new char[][] {
             };
 //findWordsSol.FindWords(board, new string[] {"aaa","aaaa","aaba"});
 findWordsSol.FindWords(board, new string[] {"aba","baa","bab","aaab","aaa","aaaa","aaba"});
+
+MaxSubArraySol maxSubArraySol = new MaxSubArraySol();
+maxSubArraySol.MaxSubArray(new int[] { -2,1,-3,4,-1,2,1,-5,4 });

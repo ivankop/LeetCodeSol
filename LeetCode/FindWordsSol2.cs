@@ -38,7 +38,7 @@ namespace LeetCode
                 }
             }
 
-            Console.WriteLine("Built map");
+            // Console.WriteLine("Built map");
 
             for (int i = 0; i < board.Length; i++)
             {
@@ -80,28 +80,7 @@ namespace LeetCode
                     }
                 }
             }
-        }
-        private string GenKey(List<char> chars, int row, int col)
-        {
-            string str = new string(chars.ToArray());
-            return $"{str}-{row}-{col}";
-        }
-
-        class Word 
-        {
-            public Word(string value, List<char> charList, Tuple<int, int> pos, HashSet<Tuple<int, int>> visited)
-            {
-                Value = value;
-                CharList = charList;
-                Pos = pos;
-                Visited = visited;
-            }
-
-            public string Value {get; set;}
-            public List<char> CharList {get; set;}
-            public Tuple<int, int> Pos {get; set;}
-            public HashSet<Tuple<int, int>> Visited {get; set;}
-        }
+        }        
     }
 }
 
