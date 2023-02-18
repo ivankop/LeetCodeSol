@@ -1,6 +1,7 @@
 ﻿using LeetCode;
 using LeetCode.Arrays;
 using LeetCode.Bitwise;
+using LeetCode.Graph;
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, LeetCode!");
 
@@ -1019,3 +1020,14 @@ findWordsSol.FindWords(board, new string[] {"aba","baa","bab","aaab","aaa","aaaa
 
 MaxSubArraySol maxSubArraySol = new MaxSubArraySol();
 maxSubArraySol.MaxSubArray(new int[] { -2,1,-3,4,-1,2,1,-5,4 });
+
+ShortestAlternatingPathsSol shortestAlternatingPathsSol = new ShortestAlternatingPathsSol();
+var redPaths = new int[][] {
+                new int[] { 0, 1},
+                new int[] { 0, 2 }
+            };
+
+var bluePaths = new int[][] {
+                 new int[] { 1, 0},
+            };
+shortestAlternatingPathsSol.ShortestAlternatingPaths(3, redPaths, bluePaths);
