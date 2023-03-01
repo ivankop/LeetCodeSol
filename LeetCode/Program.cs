@@ -1031,3 +1031,6 @@ var bluePaths = new int[][] {
                  new int[] { 1, 0},
             };
 shortestAlternatingPathsSol.ShortestAlternatingPaths(3, redPaths, bluePaths);
+
+MinSwapsCouplesSol minSwapsCouplesSol = new MinSwapsCouplesSol();
+minSwapsCouplesSol.MinSwapsCouples(new int[] { 1,5,4,3,0,2 });
