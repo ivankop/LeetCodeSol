@@ -11,16 +11,57 @@ namespace LeetCode
     {
         Dictionary<TreeNode, TreeNode> _parent = new Dictionary<TreeNode, TreeNode>();
         HashSet<TreeNode> visited = new HashSet<TreeNode>();
+        HashSet<TreeNode> path = new HashSet<TreeNode>();
+        TreeNode startNode;
+        TreeNode endNode;
         public string GetDirections(TreeNode root, int startValue, int destValue)
         {
             DateTime dateTime = DateTime.Now;
-            var startNode = findNodeDFS(root, startValue);
-            string path = string.Empty;
+            // var startNode = findNodeDFS(root, startValue);
+            findNodeDFS(root, startValue, destValue);
             Console.WriteLine((DateTime.Now - dateTime).TotalMilliseconds);            
-            var res = findPathDFS(startNode, destValue, ref path);
-            //// var res = findPathBFS(startNode, destValue);
-            return path;
+            //var res = findPathDFS(startNode, destValue, ref path);
+            var res = findPathBFS(startNode, destValue);
+            return res;
         }
+        
+
+        private string findPathBFS(TreeNode node, int destValue)
+        {
+            Queue<Tuple<TreeNode, string>> queue = new Queue<Tuple<TreeNode, string>>();
+            queue.Enqueue(new Tuple<TreeNode, string>(node, string.Empty));
+            
+            while (queue.Count > 0)
+            {
+                int count = queue.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    var lastNode = queue.Dequeue();
+                    if (visited.Contains(lastNode.Item1))
+                    {
+                        continue;
+                    }
+                    if (lastNode.Item1.val == destValue)
+                        return lastNode.Item2;
+                    visited.Add(lastNode.Item1);
+                    if (lastNode.Item1.left != null && !visited.Contains(lastNode.Item1.left) && path.Contains(lastNode.Item1.left))
+                    {
+                        queue.Enqueue(new Tuple<TreeNode, string>(lastNode.Item1.left, lastNode.Item2 + "L"));
+                    }
+                    if (lastNode.Item1.right != null && !visited.Contains(lastNode.Item1.right) && path.Contains(lastNode.Item1.right))
+                    {
+                        queue.Enqueue(new Tuple<TreeNode, string>(lastNode.Item1.right, lastNode.Item2 + "R"));
+                    }
+                    if (_parent.ContainsKey(lastNode.Item1) && !visited.Contains(_parent[lastNode.Item1]) && path.Contains(_parent[lastNode.Item1]))
+                    {
+                        queue.Enqueue(new Tuple<TreeNode, string>(_parent[lastNode.Item1], lastNode.Item2 + "U"));
+                    }
+                }
+                
+            }
+            return null;
+        }
+
         private TreeNode findNodeDFS(TreeNode node, int value)
         {
             if (node.val == value)
@@ -49,35 +90,51 @@ namespace LeetCode
             return null;
         }
 
-        private string findPathBFS(TreeNode node, int destValue)
+        private bool findNodeDFS(TreeNode node, int startValue, int endValue)
         {
-            Queue<Tuple<TreeNode, string>> queue = new Queue<Tuple<TreeNode, string>>();
-            queue.Enqueue(new Tuple<TreeNode, string>(node, string.Empty));
-            
-            while (queue.Count > 0)
+            var found = false;
+            if (node.val == startValue)
             {
-                var lastNode = queue.Dequeue();
-                if (visited.Contains(lastNode.Item1))
-                {
-                    continue;
-                }
-                if (lastNode.Item1.val == destValue)
-                    return lastNode.Item2;
-                visited.Add(lastNode.Item1);
-                if (lastNode.Item1.left != null)
-                {
-                    queue.Enqueue(new Tuple<TreeNode, string>(lastNode.Item1.left, lastNode.Item2 + "L"));
-                }
-                if (lastNode.Item1.right != null)
-                {
-                    queue.Enqueue(new Tuple<TreeNode, string>(lastNode.Item1.right, lastNode.Item2 + "R"));
-                }
-                if (_parent.ContainsKey(lastNode.Item1))
-                {
-                    queue.Enqueue(new Tuple<TreeNode, string>(_parent[lastNode.Item1], lastNode.Item2 + "U"));
-                }
+                startNode = node;
+                found = true;
+                path.Add(startNode);
             }
-            return null;
+
+            if (node.val == endValue)
+            {
+                endNode = node;
+                found = true;
+                path.Add(endNode);
+            }
+
+            if (startNode != null && endNode != null)
+            {
+                return true;
+            }
+
+            if (node.left != null)
+            {
+                _parent[node.left] = node;
+                if(findNodeDFS(node.left, startValue, endValue))
+                {
+                    path.Add(node);
+                    found = true;
+                }
+                   
+            }
+
+            if (node.right != null)
+            {
+                _parent[node.right] = node;
+                if (findNodeDFS(node.right, startValue, endValue))
+                {
+                    path.Add(node);
+                    found = true;
+                }
+                    
+            }
+            return found;
+            
         }
 
         private TreeNode findPathDFS(TreeNode node, int destValue, ref string path)

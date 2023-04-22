@@ -2,8 +2,7 @@
 using LeetCode.Arrays;
 using LeetCode.Bitwise;
 using LeetCode.Graph;
-// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, LeetCode!");
+using LeetCode.DP;
 
 KClosestSol kClosestSol = new KClosestSol();
 var input = new int[][] {
@@ -1034,3 +1033,191 @@ shortestAlternatingPathsSol.ShortestAlternatingPaths(3, redPaths, bluePaths);
 
 MinSwapsCouplesSol minSwapsCouplesSol = new MinSwapsCouplesSol();
 minSwapsCouplesSol.MinSwapsCouples(new int[] { 1,5,4,3,0,2 });
+
+NumberOfGoodPathsSol2 pathsSol = new NumberOfGoodPathsSol2();
+input = new int[][] {
+                new int[] {  0, 1 },
+                new int[] { 0, 2 },
+                new int[] { 2, 3 },
+                new int[] { 2, 4 }
+            };
+
+pathsSol.NumberOfGoodPaths(new int[] { 1, 3, 2, 1, 3 }, input);
+pathsSol.NumberOfGoodPaths(new int[] { 1 }, new int[][] { });
+
+input = new int[][] {
+                new int[] {  0, 1 },
+                new int[] { 0, 2 },
+                new int[] { 2, 3 },
+                new int[] { 2, 4 },
+                new int[] { 4, 5 },
+                new int[] { 5, 6 }
+            };
+
+pathsSol.NumberOfGoodPaths(new int[] { 1, 3, 2, 1, 3, 1, 3 }, input);
+
+ParallelCourses parallelCourses = new ParallelCourses();
+input = new int[][] {
+                new int[] {  1, 3 },
+                new int[] { 2, 3 }
+            };
+parallelCourses.MinimumSemesters(3, input);
+
+input = new int[][] {
+                new int[] {  1, 2 },
+                new int[] { 2, 3 },
+                 new int[] {  3, 1 }
+            };
+parallelCourses.MinimumSemesters(3, input);
+
+EarliestFriendMoment earliestFriendMoment = new EarliestFriendMoment();
+
+input = new int[][] {
+                new int[] { 0,2,0 },
+                new int[] { 1,0,1 },
+                new int[] { 3,0,3 },
+                new int[] { 4,1,2 },
+                new int[] { 7,3,1 }
+            };
+earliestFriendMoment.EarliestAcq(input, 4);
+
+input = new int[][] {
+                new int[] { 20190101,0,1 },
+                new int[] { 20190104, 3, 4 },
+                new int[] { 20190107, 2, 3 },
+                new int[] { 20190211, 1, 5 },
+                new int[] { 20190224, 2, 4 },
+                new int[] { 20190301, 0, 3 },
+                new int[] { 20190312, 1, 2 },
+                new int[] { 20190322, 4, 5 }
+            };
+earliestFriendMoment.EarliestAcq(input, 6);
+
+MinHeightShelvesSol minHeight = new MinHeightShelvesSol();
+
+input = new int[][] {
+                new int[] { 7, 3 },
+                new int[] { 8, 7 },
+                new int[] { 2, 7 },
+                new int[] { 2, 5 }
+};
+minHeight.MinHeightShelves(input, 10);
+
+input = new int[][] {
+                new int[] { 1, 1 },
+                new int[] { 2, 3 },
+                new int[] { 2, 3 },
+                new int[] { 1, 1 },
+                new int[] { 1, 1 },
+                new int[] { 1, 1 },
+                new int[] { 1, 2 }
+};
+minHeight.MinHeightShelves(input, 4);
+
+
+
+
+MaximumDetonationSol maximumDetonation = new MaximumDetonationSol();
+input = new int[][] {
+                new int[] { 2, 1, 3 },
+                new int[] { 6, 1, 4 }
+            };
+maximumDetonation.MaximumDetonation(input);
+
+input = new int[][] {
+                new int[] { 1,2,3 },
+                new int[] { 2,3,1 },
+                new int[] { 3,4,2 },
+                new int[] { 4,5,3 },
+                new int[] { 5, 6, 4 }
+            };
+maximumDetonation.MaximumDetonation(input);
+
+RangeModule rangeModule = new RangeModule();
+rangeModule.AddRange(10, 20);
+rangeModule.RemoveRange(14, 16);
+rangeModule.QueryRange(10, 14); // return True,(Every number in [10, 14) is being tracked)
+rangeModule.QueryRange(13, 15); // return False,(Numbers like 14, 14.03, 14.17 in [13, 15) are not being tracked)
+rangeModule.QueryRange(16, 17); // return True, (The number 16 in [16, 17) is still being tracked, despite the remove operation)
+
+MostBookedSol mostBookedSol = new MostBookedSol();
+
+input = new int[][] {
+                new int[] { 0, 10 },
+                new int[] { 1, 5 },
+                new int[] { 2, 7 },
+                new int[] { 3, 4 }
+};
+mostBookedSol.MostBooked(2, input);
+
+StockPrice stockPrice = new StockPrice();
+stockPrice.Update(1, 10); // Timestamps are [1] with corresponding prices [10].
+stockPrice.Update(2, 5);  // Timestamps are [1,2] with corresponding prices [10,5].
+stockPrice.Current();     // return 5, the latest timestamp is 2 with the price being 5.
+stockPrice.Maximum();     // return 10, the maximum price is 10 at timestamp 1.
+stockPrice.Update(1, 3);  // The previous timestamp 1 had the wrong price, so it is updated to 3.
+                          // Timestamps are [1,2] with corresponding prices [3,5].
+stockPrice.Maximum();     // return 5, the maximum price is 5 after the correction.
+stockPrice.Update(4, 2);  // Timestamps are [1,2,4] with corresponding prices [3,5,2].
+stockPrice.Minimum();     // return 2, the minimum price is 2 at timestamp 4.
+
+
+ReplaceValueInTreeSol replaceValueInTreeSol = new ReplaceValueInTreeSol();
+replaceValueInTreeSol.ReplaceValueInTree(new TreeNode(5, new TreeNode(4, new TreeNode(1), new TreeNode(10)), new TreeNode(9, null, new TreeNode(7))));
+
+ZigzagConversion zigzagConversion = new ZigzagConversion();
+zigzagConversion.Convert("AB", 1);
+
+getNumberOfMoviesSol.getNumberOfMovies("maze");
+
+MaximumProfitSol maximumProfit = new MaximumProfitSol();
+maximumProfit.maximumProfit(new List<int> { 6, 5, 4, 5, 3 });
+maximumProfit.maximumProfit(new List<int> { 1, 3, 1, 2 });
+maximumProfit.maximumProfit(new List<int> { 1, 2, 100 });
+
+LatestTimeCatchTheBusSol latestTime = new LatestTimeCatchTheBusSol();
+latestTime.LatestTimeCatchTheBus(new int[] { 18, 8, 3, 12, 9, 2, 7, 13, 20, 5 }, new int[] { 13, 10, 8, 4, 12, 14, 18, 19, 5, 2, 30, 34 }, 1);
+latestTime.LatestTimeCatchTheBus(new int[] { 10, 20 }, new int[] { 2, 17, 18, 19 }, 2);
+latestTime.LatestTimeCatchTheBus(new int[] { 2 }, new int[] { 2 }, 2);
+latestTime.LatestTimeCatchTheBus(new int[] { 3 }, new int[] { 2, 4 }, 2);
+
+NumPairsDivisibleBy60Sol numPairs = new NumPairsDivisibleBy60Sol();
+numPairs.NumPairsDivisibleBy60(new int[] { 30, 20, 150, 100, 40 });
+
+numPairs.NumPairsDivisibleBy60(new int[] { 14, 161, 302, 232, 270, 428, 155, 64, 499, 400, 25, 349, 434, 427, 5, 265, 20, 346, 463, 10, 1, 163, 189, 345, 390, 212, 498, 281, 308, 482, 447, 217, 318, 239, 374, 449, 298, 213, 2, 230, 5, 500, 300, 390, 139, 484, 464, 477, 111, 88, 93, 198, 181, 113, 393, 283, 383, 205, 42, 292, 335, 392, 384, 268, 361, 462, 413, 176, 118, 111, 143, 242, 166, 286, 177, 52, 126, 342, 415, 302, 210, 48, 369, 148, 209, 87, 212, 53, 296, 95, 97, 45, 467, 47, 373, 404, 43, 439, 19, 64, 289, 218, 268, 460, 238, 456, 490, 155, 429, 218, 301, 225, 228, 237, 453, 267, 259, 327, 427, 169, 176, 322, 216, 451, 29, 327, 404, 177, 225, 44, 248, 174, 287, 326, 441, 354, 110, 4, 226, 324, 331, 158, 454, 469, 354, 383, 336, 211, 133, 500, 233, 330, 471, 327, 426, 478, 195, 232, 163, 312, 126, 51, 161, 248, 433, 348, 464, 206, 480, 478, 98, 354, 304, 424, 338, 382, 431, 379, 194, 488, 6, 494, 394, 469, 430, 1, 207, 307, 172, 47, 269, 472, 415, 163, 309, 68, 213, 175, 343, 187, 15, 232, 429, 389, 373, 143, 146, 88, 58, 320, 116, 82, 482, 125, 343, 329, 115, 116, 183, 389, 112, 294, 74, 89, 62 });
+numPairs.NumPairsDivisibleBy60(new int[] { 60, 60, 60 });
+
+LongestZigZagSol longestZigZag = new LongestZigZagSol();
+longestZigZag.LongestZigZag(new TreeNode(1, 
+        null, new TreeNode(2, 
+            new TreeNode(3), new TreeNode(4, 
+                new TreeNode(5, null, new TreeNode(7, null, new TreeNode(8))), new TreeNode(6)))));
+
+MinWastedSpaceSol minWasted = new MinWastedSpaceSol();
+input = new int[][] {
+
+                new int[] { 12 },
+                new int[] { 11, 9 },
+                new int[] { 10, 5, 14 }
+};
+minWasted.MinWastedSpace(new int[] { 3, 5, 8, 10, 11, 12 }, input);
+
+input = new int[][] {
+               
+                new int[] { 4, 8 },
+                new int[] { 2, 8 }
+};
+minWasted.MinWastedSpace(new int[] { 2, 3, 5 }, input);
+
+SmallestStringWithSwapsSol smallestString = new SmallestStringWithSwapsSol();
+IList<IList<int>> list = new List<IList<int>>();
+list.Add(new List<int>(new int[] { 3, 3 }));
+list.Add(new List<int>(new int[] { 3, 0 }));
+list.Add(new List<int>(new int[] { 5, 1 }));
+list.Add(new List<int>(new int[] { 3, 1 }));
+list.Add(new List<int>(new int[] { 3, 4 }));
+list.Add(new List<int>(new int[] { 3, 5 }));
+smallestString.SmallestStringWithSwaps("udyyek", list);
+
+
+

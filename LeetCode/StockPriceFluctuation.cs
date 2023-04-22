@@ -8,80 +8,71 @@ namespace LeetCode
 {
     public class StockPrice
     {
-        private Dictionary<int,int> _price;
-        int _maxPrice;
-        int _minPrice;
-        int _lastTimestamp;
-        bool _maxPriceInvalid;
-        bool _minPriceInvalid;
+        private SortedList<int, int> _priceList;
+        Dictionary<int, int> _log;
+        int _lastTimestamp = 0;
+        int _lastPrice;
+        
         public StockPrice()
         {
-            _price = new Dictionary<int, int>();
-            _maxPrice = -1;
-            _minPrice = int.MaxValue;
-            _lastTimestamp = -1;
-            _maxPriceInvalid = false;
-            _minPriceInvalid = false;
+           _priceList = new SortedList<int, int>();
+            _log = new Dictionary<int, int>();
         }
 
         public void Update(int timestamp, int price)
         {
-            if (_maxPrice> -1 && _price[timestamp] == _maxPrice)
+            if (!_log.ContainsKey(timestamp))
             {
-                // need to find and update max price
-                // _maxPriceIndex = _price.Where(kv => kv.Value == _price.Values.Max()).FirstOrDefault().Key;
-                // _maxPrice = _price[_maxPriceIndex];
-                _maxPriceInvalid = true;
+                _log.Add(timestamp, price);
+                if (!_priceList.ContainsKey(price))
+                {
+                    _priceList.Add(price, 1);
+                }
+                else
+                {
+                    _priceList[price]++;
+                }
             }
-
-            if (_minPrice < int.MaxValue && _price[timestamp] == _minPrice)
+            else
             {
-                // need to find and update min price
-                //_minPriceIndex = _price.Where(kv => kv.Value == _price.Values.Min()).FirstOrDefault().Key;
-                //_minPrice = _price[_minPriceIndex];
-                _minPriceInvalid = true;
-            }
+                var oldPrice = _log[timestamp];
+                _priceList[oldPrice]--;
+                if (_priceList[oldPrice] == 0)
+                {
+                    _priceList.Remove(oldPrice);
+                }
 
-            _price[timestamp] = price;
+                if (!_priceList.ContainsKey(price))
+                {
+                    _priceList.Add(price, 1);
+                }
+                else
+                {
+                    _priceList[price]++;
+                }
+                _log[timestamp] = price;
+            }
             
-
-            if (!_maxPriceInvalid && price >= _maxPrice)
-            {
-                _maxPrice = price;
-            }
-            if (!_minPriceInvalid && price <= _minPrice)
-            {
-                _minPrice = price;
-            }
-            if (timestamp > _lastTimestamp)
+            if (timestamp >= _lastTimestamp)
             {
                 _lastTimestamp = timestamp;
+                _lastPrice = price;
             }
         }
 
         public int Current()
         {
-            return _price[_lastTimestamp];
+            return _lastPrice;
         }
 
         public int Maximum()
         {
-            if (_maxPriceInvalid)
-            {
-                _maxPrice = _price.Values.Max();
-                _maxPriceInvalid = false;
-            }
-            return _maxPrice;
+            return _priceList.Keys[_priceList.Count - 1];
         }
 
         public int Minimum()
         {
-            if (_minPriceInvalid)
-            {
-                _minPrice = _price.Values.Min();
-                _minPriceInvalid = false;
-            }
-            return _minPrice;
+            return _priceList.Keys[0];
         }
     }
 }
