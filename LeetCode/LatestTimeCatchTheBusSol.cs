@@ -10,66 +10,97 @@ namespace LeetCode
     {
         public int LatestTimeCatchTheBus(int[] buses, int[] passengers, int capacity)
         {
-            SortedDictionary<int, HashSet<int>> busCap = new SortedDictionary<int, HashSet<int>>();
-            // Array.Sort(buses);
-            // Array.Sort(passengers);
-            PriorityQueue<int, int> queue = new PriorityQueue<int, int>();
-            for (int i = 0; i < passengers.Length; i++)
-            {
-                queue.Enqueue(i, passengers[i]);
-            }
+            // PriorityQueue<int, int> queue = new PriorityQueue<int, int>(new MaxHeapComparer());
+            List<SortedSet<int>> busesPass = new List<SortedSet<int>>();
+            HashSet<int> passSet = new HashSet<int>();
+            Array.Sort(passengers);
+            Array.Sort(buses);
+            int index = 0;
+            int currentCap = 0;
             for (int i = 0; i < buses.Length; i++)
             {
-                busCap.Add(buses[i], new HashSet<int>());
-            }
-            List<int> set = new List<int>();
-            while (queue.Count > 0)
-            {
-                var pas = queue.Dequeue();
-                bool filled = false;
-                foreach (var bus in busCap)
+                busesPass.Add(new SortedSet<int>());
+                for (int j = index; j < passengers.Length; j++)
                 {
-                    if (passengers[pas] <= bus.Key && bus.Value.Count < capacity)
+                    passSet.Add(passengers[j]);
+                    if (passengers[j] <= buses[i])
                     {
-                        bus.Value.Add(passengers[pas]);
-                        set.Add(passengers[pas]);
-                        filled = true;
+                        //queue.Enqueue(passengers[j], passengers[j]);
+                        busesPass[i].Add(passengers[j]);
+                        currentCap++;
+                        if (currentCap == capacity)
+                        {
+                            index = j + 1;
+                            currentCap = 0;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        index = j;
+                        currentCap = 0;
                         break;
                     }
-                }
-                if (!filled)
-                {
-                    break;
+
                 }
             }
-            int ans = 0;
-            for (int i = buses.Length - 1; i >= 0; i--)
+            int ans = 1;
+            for (int i = busesPass.Count - 1; i >= 0; i--)
             {
-                if (busCap[buses[i]].Count < capacity)
+                if (busesPass[i].Count == 0)
                 {
-                    for (int j = buses[i]; j > 0; j--)
+                    ans = buses[i];
+                    break;
+                }
+                else if (busesPass[i].Count < capacity)
+                {
+                    var tmp = FindBusTime(busesPass[i], buses[i]);
+                    if (!passSet.Contains(tmp))
                     {
-                        if (!busCap[buses[i]].Contains(j))
-                        {
-                            return j;
-                        }
+                        ans = tmp;
+                        break;
                     }
                 }
                 else
                 {
-                    for (int j = set[set.Count - 1]; j > 0; j--)
+                    var tmpTime = FindTime(busesPass[i]);
+                    if (i > 0 && !busesPass[i - 1].Contains(tmpTime))
                     {
-                        if (!set.Contains(j))
-                        {
-                            return j;
-                        }
+                        ans = tmpTime;
+                        break;
                     }
-
                 }
-                
             }
-            
             return ans;
+        }
+
+        int FindTime(SortedSet<int> set)
+        {
+            for (int i = set.Max - 1; i > set.Min; i--)
+            {
+                if (!set.Contains(i))
+                {
+                    return i;
+                }
+            }
+            return set.Min - 1;
+        }
+
+        int FindBusTime(SortedSet<int> set, int busTime)
+        {
+            for (int i = busTime; i > set.Min; i--)
+            {
+                if (!set.Contains(i))
+                {
+                    return i;
+                }
+            }
+            return set.Min - 1;
+        }
+
+        public class MaxHeapComparer : IComparer<int>
+        {
+            public int Compare(int x, int y) => y.CompareTo(x);
         }
     }
 }

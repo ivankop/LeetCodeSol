@@ -1176,10 +1176,15 @@ maximumProfit.maximumProfit(new List<int> { 1, 3, 1, 2 });
 maximumProfit.maximumProfit(new List<int> { 1, 2, 100 });
 
 LatestTimeCatchTheBusSol latestTime = new LatestTimeCatchTheBusSol();
+latestTime.LatestTimeCatchTheBus(new int[] { 15, 16, 17, 7, 10, 20, 13, 12 }, new int[] { 18, 15, 11, 17, 12, 13, 14, 10, 19, 16 }, 2);
+latestTime.LatestTimeCatchTheBus(new int[] { 3 }, new int[] { 2, 3 }, 2);
+latestTime.LatestTimeCatchTheBus(new int[] { 20, 30, 10 }, new int[] { 19, 13, 26, 4, 25, 11, 21 }, 2);
 latestTime.LatestTimeCatchTheBus(new int[] { 18, 8, 3, 12, 9, 2, 7, 13, 20, 5 }, new int[] { 13, 10, 8, 4, 12, 14, 18, 19, 5, 2, 30, 34 }, 1);
 latestTime.LatestTimeCatchTheBus(new int[] { 10, 20 }, new int[] { 2, 17, 18, 19 }, 2);
 latestTime.LatestTimeCatchTheBus(new int[] { 2 }, new int[] { 2 }, 2);
 latestTime.LatestTimeCatchTheBus(new int[] { 3 }, new int[] { 2, 4 }, 2);
+
+
 
 NumPairsDivisibleBy60Sol numPairs = new NumPairsDivisibleBy60Sol();
 numPairs.NumPairsDivisibleBy60(new int[] { 30, 20, 150, 100, 40 });
@@ -1218,6 +1223,139 @@ list.Add(new List<int>(new int[] { 3, 1 }));
 list.Add(new List<int>(new int[] { 3, 4 }));
 list.Add(new List<int>(new int[] { 3, 5 }));
 smallestString.SmallestStringWithSwaps("udyyek", list);
+
+MaximumMinimumPathSol pathSol = new MaximumMinimumPathSol();
+input = new int[][] {
+
+                new int[] { 2,2,1,2,2,2 },
+                new int[] { 1,2,2,2,1,2 }
+};
+pathSol.MaximumMinimumPath(input);
+
+FindSecretWordSol secretWordSol = new FindSecretWordSol();
+secretWordSol.FindSecretWord(new string[] { "gaxckt", "trlccr", "jxwhkz", "ycbfps", 
+    "peayuf", "yiejjw", "ldzccp", "nqsjoa", "qrjasy", "pcldos", "acrtag", "buyeia", 
+    "ubmtpj", "drtclz", "zqderp", "snywek", "caoztp", "ibpghw", "evtkhl", "bhpfla", 
+    "ymqhxk", "qkvipb", "tvmued", "rvbass", "axeasm", "qolsjg", "roswcb", "vdjgxx", "bugbyv", "zipjpc", "tamszl", 
+    "osdifo", "dvxlxm", "iwmyfb", "wmnwhe", "hslnop", "nkrfwn", "puvgve", "rqsqpq", "jwoswl", "tittgf", "evqsqe", 
+    "aishiv", "pmwovj", "sorbte", "hbaczn", "coifed", "hrctvp", "vkytbw", "dizcxz", "arabol", "uywurk", "ppywdo",
+    "resfls", "tmoliy", "etriev", "oanvlx", "wcsnzy", "loufkw", "onnwcy", "novblw", "mtxgwe", "rgrdbt", "ckolob", 
+    "kxnflb", "phonmg", "egcdab", "cykndr", "lkzobv", "ifwmwp", "jqmbib", "mypnvf", "lnrgnj", "clijwa", "kiioqr", 
+    "syzebr", "rqsmhg", "sczjmz", "hsdjfp", "mjcgvm", 
+    "ajotcx", "olgnfv", "mjyjxj", "wzgbmg", "lpcnbj", "yjjlwn", "blrogv", "bdplzs", "oxblph", "twejel", "rupapy", 
+    "euwrrz", "apiqzu", "ydcroj", "ldvzgq", "zailgu", "xgqpsr", "wxdyho", "alrplq", "brklfk" }, new FindSecretWordSol.Master());
+
+MinNumberOfSemestersSol minSem = new MinNumberOfSemestersSol();
+input = new int[][] {
+
+    new int[] {2,1},new int[]{3,1},
+    new int[]{1,4}
+};
+minSem.MinNumberOfSemesters(4, input, 2);
+
+
+input = new int[][] {
+
+    new int[] {11,10},new int[]{6,3},new int[]{2,5},new int[]{9,2},new int[]{4,12},new int[]{8,7},new int[]{9,5},new int[]{6,2},new int[]{7,2},new int[]{7,4},new int[]{9,3},new int[]{11,1},new int[]{4,3}
+};
+minSem.MinNumberOfSemesters(12, input, 3);
+
+
+input = new int[][] {
+
+    new int[] {2,4},
+    new int[]{6,4}
+};
+minSem.MinNumberOfSemesters(7, input, 2);
+
+
+
+
+input = new int[][] {
+
+    new int[] {1,5},new int[]{2,5},
+    new int[]{3,5},new int[]{4,6},new int[]{4,7},new int[]{4,8},new int[]{4,9}
+};
+minSem.MinNumberOfSemesters(9, input, 3);
+
+input = new int[][] {
+
+    new int[] {12,8},new int[]{2,4},
+    new int[]{3,7},new int[]{6,8},
+    new int[]{11,8},new int[]{9,4},
+    new int[]{9,7},new int[]{12,4},
+    new int[]{11,4},new int[]{6,4},
+    new int[]{1,4},new int[]{10,7},
+    new int[]{10,4},new int[]{1,7},
+    new int[]{1,8},new int[]{2,7},
+    new int[]{8,4},new int[]{10,8},
+    new int[]{12,7},new int[]{5,4},
+    new int[]{3,4},new int[]{11,7},
+    new int[]{7,4},new int[]{13,4},
+    new int[]{9,8},new int[]{13,8}
+};
+minSem.MinNumberOfSemesters(13, input, 9);
+
+
+
+minSem.MinNumberOfSemesters(11, new int[][] { }, 2);
+
+BulbSwitchSol bulbSwitch = new BulbSwitchSol();
+bulbSwitch.BulbSwitch(3);
+
+AddMinimumSol addMinimum = new AddMinimumSol();
+addMinimum.AddMinimum("aaa");
+addMinimum.AddMinimum("b");
+
+NumSimilarGroupsSol numSimilarGroups = new NumSimilarGroupsSol();
+numSimilarGroups.NumSimilarGroups(new string[] { "tars", "rats", "arts", "star" });
+numSimilarGroups.NumSimilarGroups(new string[] { "ajdidocuyh", "djdyaohuic", "ddjyhuicoa", "djdhaoyuic", "ddjoiuycha", "ddhoiuycja", "ajdydocuih", "ddjiouycha", "ajdydohuic", "ddjyouicha" });
+
+
+numSimilarGroups.NumSimilarGroups(new string[] { "koqnn", "knnqo", "noqnk", "nqkon" });
+
+MaxNumEdgesToRemoveSol maxNumEdgesToRemove = new MaxNumEdgesToRemoveSol();
+input = new int[][] { 
+    new int[] { 3, 1, 2 }, 
+    new int[] { 3, 2, 3 }, 
+    new int[] { 1, 1, 3 }, 
+    new int[] { 1, 2, 4 }, 
+    new int[] { 1, 1, 2 }, 
+    new int[] { 2, 3, 4 } 
+};
+maxNumEdgesToRemove.MaxNumEdgesToRemove(4, input);
+
+MinPathCostSol minPath = new MinPathCostSol();
+input = new int[][] {
+    new int[] { 5, 3 },
+    new int[] { 4, 0 },
+    new int[] { 2, 1 }    
+};
+
+var input2 = new int[][] {
+    new int[] { 9, 8 },
+    new int[] { 1, 5 },
+    new int[] { 10, 12 },
+    new int[] { 3, 6 },
+    new int[] { 2, 4 },
+    new int[] { 14, 3 }
+};
+//minPath.MinPathCost(input, input2);
+
+MaxValueOfCoinsSol maxValueOfCoinsSol = new MaxValueOfCoinsSol();
+input = new int[][] {
+    new int[] { 1, 100, 3 },
+    new int[] { 7, 8, 9}
+};
+maxValueOfCoinsSol.MaxValueOfCoins(new List<IList<int>>(input), 2);
+
+input = new int[][] {
+    new int[] { 37,88 },
+    new int[] { 51, 64, 65, 20, 95, 30, 26 },
+    new int[] { 9,62,20 },
+    new int[] { 44 }
+};
+maxValueOfCoinsSol.MaxValueOfCoins(new List<IList<int>>(input), 9);
 
 
 
