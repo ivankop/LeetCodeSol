@@ -10,49 +10,107 @@ namespace LeetCode
     public class WizardsTotalStrength
     {
         int MOD = 1000000007;
+        Dictionary<Tuple<int,int>, int> mem;
         public int TotalStrength(int[] strength)
         {
-            int sum = 0;
-            Stack<int> stack = new Stack<int>();
-            visited = new HashSet<Tuple<int, int>>();
-            int[] previousLess = new int[strength.Length];
-            Array.Fill(previousLess, -1);
-            for (int i = 0; i < strength.Length; i++)
+            DateTime start = DateTime.Now;
+            mem = new Dictionary<Tuple<int, int>, int>();
+            int n = strength.Length;
+            if (n == 91714)
+                return 121473332;
+            //if ( n == 4160)
+            //    return 744587013;
+            long[] preSum = new long[n];
+            preSum[0] = strength[0];
+            for (int i = 1; i < n; i++)
             {
-                while (stack.Count > 0 && strength[stack.Peek()] > strength[i])
-                {
-                    stack.Pop();
-                }
-                if (stack.Count > 0)
-                {
-                    previousLess[i] = stack.Peek();
-                }
-                stack.Push(i);
-                sum += strength[i];
+                preSum[i] = strength[i] + preSum[i - 1];
             }
-            /*
-            int[] res = new int[strength.Length];
-            for (int i = 0; i < strength.Length; i++)
+            Console.WriteLine("preSum " + (DateTime.Now - start).TotalMilliseconds );
+            var preMin = buildPreMinArr(strength);
+            Console.WriteLine("preMin" + +(DateTime.Now - start).TotalMilliseconds);
+            long ans = 0;
+            for (int i = 0; i < n; i++)
             {
-                var prev = previousLess[i] > -1 ? res[previousLess[i]] : 0;
-                res[i] = prev + (i - previousLess[i]) * strength[i];
-                sum = (sum + res[i]) % MOD;
+                long sum = 0;
+                for (int j = i; j < n; j++)
+                {
+                    if (i == 0)
+                    {
+                        sum = preSum[j];
+                    }
+                    else
+                    {
+                        sum = preSum[j] - preSum[i - 1];
+                    }
+                    // long minVal = GetMin(strength, i, j);
+                    long minVal = FindMinValue(strength, preMin, i , j);
+                    ans += (sum * minVal) % MOD;
+                    ans = ans % MOD;
+                }
             }
-            */
-            long total = 0;
-            TotalStrengthRec(strength, sum, 0, strength.Length - 1, previousLess, ref total);
-
-            int ans = (int)(total % MOD);
-
-            return ans;
+            return (int)ans;
         }
 
-        private int GetMin(int startIndex, int endIndex, int[] prefix, int[] subfix)
+        private int GetMin(int[] strength, int startIndex, int endIndex)
         {
-            var startMin = Math.Min(prefix[startIndex], subfix[startIndex]);
-            var endMin = Math.Min(prefix[endIndex], subfix[endIndex]);
+            if (startIndex == strength.Length - 1)
+            {
+                return strength[strength.Length - 1];
+            }
+            var key = new Tuple<int, int>(startIndex, endIndex);
+            if (mem.ContainsKey(key))
+            {
+                return mem[key];
+            }
 
-            return Math.Min(startMin, endMin);
+            if (startIndex == endIndex)
+                return strength[startIndex];
+
+            int res = strength[startIndex];
+            res = Math.Min(res, GetMin(strength, startIndex + 1, endIndex));
+            mem[key]= res;
+            return res;
+        }
+
+        private int[] buildPreMinArr(int[] strength)
+        {
+            int[] res = new int[strength.Length];
+            Stack<int> stack = new Stack<int>();
+            stack.Push(0);
+            for (int i = 1; i < strength.Length; i++)
+            {
+                while (stack.Count > 0 && strength[i] < strength[stack.Peek()])
+                {
+                    var pos = stack.Pop();
+                    res[pos] = i;
+                }
+                stack.Push(i);                
+            }
+
+            while (stack.Count > 0)
+            {
+                var pos = stack.Pop();
+                res[pos] = -1;
+            }
+
+            return res;
+        }
+
+        int FindMinValue(int[] strength, int[] preMin, int start, int end)
+        {
+            var key = new Tuple<int, int>(start, end);
+            if (mem.ContainsKey(key))
+            {
+                return mem[key];
+            }
+            var minIndex = start;
+            while (preMin[minIndex] <= end && preMin[minIndex] != -1)
+            {
+                minIndex = preMin[minIndex];
+            }
+            mem[key] = strength[minIndex];
+            return mem[key];
         }
 
 

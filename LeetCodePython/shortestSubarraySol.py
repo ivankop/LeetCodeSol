@@ -2,32 +2,32 @@ from typing import List
 from queue import PriorityQueue
 import sys
 
+from collections import deque
+
 class shortestSubarraySol:
     def shortestSubarray(self, nums: List[int], k: int) -> int:
+        preSum = [nums[0]]
         n = len(nums)
-        q = PriorityQueue()
-        curSum = nums[0]
-        start = 0
-        end = 0
-
+        queue = deque()
         for i in range(1, n):
-            if curSum + nums[i] < curSum:
-                #if curSum >= k:
-                q.put((curSum, (curSum, start, end)))
-                start = i
-                end = i
-                curSum = nums[i]
-            else:
-                end = i
-                curSum += nums[i]
+            preSum.append(nums[i] + preSum[-1])
         ans = sys.maxsize
-        while not q.empty():
-            curSum, start, end = q.get()
-            while start < end :
-                if curSum - nums[start] < k:
-                    ans = min(ans, end - start)
-                    break
-                start += 1
+        for i in range(n):
+            if preSum[i] >= k:
+                ans = min(ans, i + 1)
+            left = sys.maxsize
+            while len(queue) > 0 and preSum[i]  - preSum[queue[0]] >= k:
+                left = queue.popleft()                    
+            #left = queue[0] if len(queue) > 0 else i
+            if left != sys.maxsize:
+                ans = min(ans, i - left)
+            while len(queue) > 0 and preSum[queue[-1]] > preSum[i]:
+                queue.pop()
+            queue.append(i)
+
+            
+        if ans == sys.maxsize:
+            return -1
         return ans
 
     

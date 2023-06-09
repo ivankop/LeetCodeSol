@@ -740,13 +740,16 @@ matrix = new char[][] {
 sudokuSolver.SolveSudoku(matrix);
 
 WizardsTotalStrength totalStrength = new WizardsTotalStrength();
-totalStrength.TotalStrength(new int[] { 5, 6, 12});
-totalStrength.TotalStrength(new int[] { 1, 3, 1, 2 });
-totalStrength.TotalStrength(new int[] { 747, 812, 112, 1230, 1426, 1477, 1388, 976, 849, 1431, 1885, 
+totalStrength.TotalStrength(new int[] { 5, 2, 4,  3, 1, 6, 2 });
+totalStrength.TotalStrength(new int[] { 747, 812, 112, 1230, 1426, 1477, 1388, 976, 849, 1431, 1885,
     1845, 1070, 1980, 280, 1075, 232, 1330, 1868, 1696, 1361, 1822, 524, 1899, 1904, 538, 731, 985,
-    279, 1608, 1558, 930, 1232, 1497, 875, 1850, 1173, 805, 1720, 33, 233, 330, 1429, 
-    1688, 281, 362, 1963, 927, 1688, 256, 1594, 1823, 743, 553, 1633, 1898, 1101, 1278, 717, 522, 1926, 
+    279, 1608, 1558, 930, 1232, 1497, 875, 1850, 1173, 805, 1720, 33, 233, 330, 1429,
+    1688, 281, 362, 1963, 927, 1688, 256, 1594, 1823, 743, 553, 1633, 1898, 1101, 1278, 717, 522, 1926,
     1451, 119, 1283, 1016, 194, 780, 1436, 1233, 710, 1608, 523, 874, 1779, 1822, 134, 1984 });
+totalStrength.TotalStrength(new int[] { 1, 3, 1, 2 });
+totalStrength.TotalStrength(new int[] { 5, 6, 12});
+
+
 totalStrength.TotalStrength(new int[] { 5, 4, 6 });
 
 MaximumBooksSol maximumBooks = new MaximumBooksSol();
@@ -859,6 +862,7 @@ maxLength.MaxLength(new List<string> { "un", "iq", "ue" });
 maxLength.MaxLength(new List<string> { "cha", "r", "act", "ers" });
 
 MaxChunksToSortedSol maxChunksToSorted = new MaxChunksToSortedSol();
+maxChunksToSorted.MaxChunksToSorted(new int[] { 1, 0, 1, 3, 2 });
 maxChunksToSorted.MaxChunksToSorted(new int[] { 1, 1, 0, 0, 1 });
 
 SpiralMatrixIIISol spiralMatrix = new SpiralMatrixIIISol();
@@ -1357,5 +1361,39 @@ input = new int[][] {
 };
 maxValueOfCoinsSol.MaxValueOfCoins(new List<IList<int>>(input), 9);
 
+PaintHouseII paintHouse = new PaintHouseII();
+input = new int[][] {
+    new int[] { 1, 5, 3 },
+    new int[] { 2, 9, 4 },
+    new int[] { 10, 8, 1 }
+};
+paintHouse.MinCostII(input);
 
+input = new int[][] {
+    new int[] { 1, 5, 3 },
+    new int[] { 2, 9, 4 }
+};
+paintHouse.MinCostII(input);
 
+MincostToHireWorkersSol mincostToHire = new MincostToHireWorkersSol();
+mincostToHire.MincostToHireWorkers(new int[] { 1, 2 }, new int[] { 14, 16 }, 1);
+mincostToHire.MincostToHireWorkers(new int[] { 4, 5 }, new int[] { 8 , 14 }, 2);
+mincostToHire.MincostToHireWorkers(new int[] { 3, 1, 10, 10, 1 }, new int[] { 4, 8, 2, 2, 7 }, 3);
+mincostToHire.MincostToHireWorkers(new int[] { 10, 20, 5 }, new int[] { 70, 50, 30 }, 2);
+
+ShuffleArray shuffleArray = new ShuffleArray(new int[] { 1, 2, 3 });
+shuffleArray.Shuffle();
+
+MinOperationsSol minOperationsSol = new MinOperationsSol();
+minOperationsSol.MinOperations(new int[] { 5, 6, 4, 3, 1, 2 }, new int[] { 6, 3, 3, 1, 4, 5, 3, 4, 1, 3, 4 });
+
+minOperationsSol.MinOperations(new int[] { 1, 1, 1, 1, 1, 1, 1 }, new int[] { 6 });
+minOperationsSol.MinOperations(new int[] { 1, 2, 3, 4, 5, 6 }, new int[] { 1, 1, 2, 2, 2, 2 });
+minOperationsSol.MinOperations(new int[] { 6, 6 }, new int [] { 1 });
+
+NumOfMinutesSol numOfMinutesSol = new NumOfMinutesSol();
+numOfMinutesSol.NumOfMinutes(11, 4, new int[] { 5, 9, 6, 10, -1, 8, 9, 1, 9, 3, 4 }, new int[] { 0, 213, 0, 253, 686, 170, 975, 0, 261, 309, 337 });
+
+MinFlipsSol minFlip= new MinFlipsSol();
+minFlip.MinFlips(4, 2, 7);
+minFlip.MinFlips(2, 6, 5);
